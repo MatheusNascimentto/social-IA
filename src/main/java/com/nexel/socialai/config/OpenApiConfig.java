@@ -22,12 +22,12 @@ public class OpenApiConfig {
     public OpenAPI nexelSocialAiOpenApi() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Nexel Social AI API")
+                        .title("Social AI API")
                         .description("Backend API for social media content generation powered by AI.")
                         .version("v1.0.0")
                         .contact(new Contact()
-                                .name("Nexel Social AI")
-                                .email("dev@nexel-social-ai.local"))
+                                .name("Social AI")
+                                .email("dev@social-ai.local"))
                         .license(new License()
                                 .name("MIT")
                                 .url("https://opensource.org/licenses/MIT")));

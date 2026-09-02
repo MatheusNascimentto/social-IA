@@ -3,10 +3,9 @@ package com.nexel.socialai;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
-import org.springframework.data.web.config.PageSerializationMode;
 
 @SpringBootApplication
-@EnableSpringDataWebSupport(pageSerializationMode = PageSerializationMode.VIA_DTO)
+@EnableSpringDataWebSupport(pageSerializationMode = EnableSpringDataWebSupport.PageSerializationMode.VIA_DTO)
 public class NexelSocialAiApplication {
 
     public static void main(String[] args) {
