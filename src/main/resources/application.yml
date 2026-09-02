@@ -27,6 +27,17 @@ app:
   jwt:
     secret: ${JWT_SECRET:change-me-in-production}
     expiration-minutes: ${JWT_EXPIRATION_MINUTES:60}
+  ai:
+    provider: ${AI_PROVIDER:openai}
+    openai:
+      api-key: ${OPENAI_API_KEY:}
+      base-url: ${OPENAI_BASE_URL:https://api.openai.com/v1}
+      model: ${OPENAI_MODEL:gpt-4o-mini}
+      timeout-seconds: ${OPENAI_TIMEOUT_SECONDS:30}
+    ollama:
+      base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+      model: ${OLLAMA_MODEL:llama3.2:latest}
+      timeout-seconds: ${OLLAMA_TIMEOUT_SECONDS:120}
 
 server:
   port: ${SERVER_PORT:8080}

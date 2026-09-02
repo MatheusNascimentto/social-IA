@@ -19,6 +19,17 @@ app:
   jwt:
     secret: test-secret-key-for-jwt-validation
     expiration-minutes: 60
+  ai:
+    provider: openai
+    openai:
+      api-key: test-api-key
+      base-url: https://api.openai.com/v1
+      model: gpt-4o-mini
+      timeout-seconds: 30
+    ollama:
+      base-url: http://localhost:11434
+      model: llama3.2:latest
+      timeout-seconds: 120
 
 springdoc:
   swagger-ui:
