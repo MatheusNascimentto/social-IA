@@ -1,3 +1,10 @@
 springdoc:
   swagger-ui:
     enabled: true
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+# Nota: "update" é apenas para desenvolvimento local. Não usar em produção; prefira Flyway/Liquibase para migrações.
