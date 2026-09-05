@@ -14,10 +14,12 @@ import com.nexel.socialai.content.repository.ImprovementRepository;
 import com.nexel.socialai.content.service.ImprovementService;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ImprovementServiceImpl implements ImprovementService {
 
     private final CompanyRepository companyRepository;
@@ -27,6 +29,8 @@ public class ImprovementServiceImpl implements ImprovementService {
 
     @Override
     public ImprovementResponse improveAndSave(String requesterEmail, CreateImprovementRequest request) {
+        log.info("Improving content for companyId={} by requester={}", request.companyId(), requesterEmail);
+
         Company company = companyRepository.findById(request.companyId())
                 .orElseThrow(() -> new BusinessException("Company not found."));
 
@@ -49,7 +53,6 @@ public class ImprovementServiceImpl implements ImprovementService {
 
         Improvement saved = improvementRepository.save(improvement);
 
-        // log to history
         HistoryEntry entry = HistoryEntry.builder()
                 .company(company)
                 .contentType("IMPROVEMENT")
@@ -58,6 +61,7 @@ public class ImprovementServiceImpl implements ImprovementService {
                 .build();
 
         historyRepository.save(entry);
+        log.info("Improvement saved successfully for companyId={} with id={}", company.getId(), saved.getId());
 
         return ImprovementMapper.toResponse(saved);
     }

@@ -12,10 +12,12 @@ import com.nexel.socialai.content.repository.CaptionRepository;
 import com.nexel.socialai.content.service.CaptionService;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CaptionServiceImpl implements CaptionService {
 
     private final CompanyRepository companyRepository;
@@ -24,6 +26,8 @@ public class CaptionServiceImpl implements CaptionService {
 
     @Override
     public CaptionResponse generateAndSave(String requesterEmail, CreateCaptionRequest request) {
+        log.info("Generating caption for companyId={} by requester={}", request.companyId(), requesterEmail);
+
         Company company = companyRepository.findById(request.companyId())
                 .orElseThrow(() -> new BusinessException("Company not found."));
 
@@ -43,6 +47,7 @@ public class CaptionServiceImpl implements CaptionService {
                 .build();
 
         Caption saved = captionRepository.save(caption);
+        log.info("Caption saved successfully for companyId={} with id={}", company.getId(), saved.getId());
 
         return CaptionMapper.toResponse(saved);
     }

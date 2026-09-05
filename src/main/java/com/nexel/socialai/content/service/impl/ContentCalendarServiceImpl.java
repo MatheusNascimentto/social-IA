@@ -37,7 +37,10 @@ public class ContentCalendarServiceImpl implements ContentCalendarService {
         int days = request.days() == null ? 14 : request.days();
 
         String systemPrompt = buildSystemPrompt(company);
-        String aiPrompt = request.prompt() + "\n\nRespond with a numbered list of " + days + " entries. Each entry must start with an ISO date starting at " + start.format(DateTimeFormatter.ISO_DATE) + ", incrementing by one day, followed by ": " + "and then a short content idea. Example:\n2026-09-01: Short caption about X";
+        String aiPrompt = request.prompt()
+                + "\n\nRespond with a numbered list of " + days + " entries. Each entry must start with an ISO date starting at "
+                + start.format(DateTimeFormatter.ISO_DATE)
+                + ", incrementing by one day, followed by a short content idea. Example:\n2026-09-01: Short caption about X";
 
         String aiOutput = aiProvider.generateContent(systemPrompt, aiPrompt);
 

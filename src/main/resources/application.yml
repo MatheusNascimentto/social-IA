@@ -24,6 +24,13 @@ spring:
     locations: classpath:db/migration
     baseline-on-migrate: true
 
+logging:
+  level:
+    root: INFO
+    com.nexel.socialai: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n"
+
 app:
   jwt:
     secret: ${JWT_SECRET:change-me-in-production}

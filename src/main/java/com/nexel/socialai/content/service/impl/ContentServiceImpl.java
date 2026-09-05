@@ -10,10 +10,12 @@ import com.nexel.socialai.content.service.ContentService;
 import java.time.Instant;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ContentServiceImpl implements ContentService {
 
     private final CompanyRepository companyRepository;
@@ -21,6 +23,8 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     public GeneratedContentResponse generate(String requesterEmail, GenerateContentRequest request) {
+        log.info("Generating content for companyId={} by requester={}", request.companyId(), requesterEmail);
+
         Company company = companyRepository.findById(request.companyId())
                 .orElseThrow(() -> new BusinessException("Company not found."));
 
@@ -30,6 +34,7 @@ public class ContentServiceImpl implements ContentService {
 
         String systemPrompt = buildSystemPrompt(company, request);
         String generatedContent = aiProvider.generateContent(systemPrompt, request.prompt());
+        log.info("Content generated successfully for companyId={}", company.getId());
 
         return new GeneratedContentResponse(
                 company.getId(),

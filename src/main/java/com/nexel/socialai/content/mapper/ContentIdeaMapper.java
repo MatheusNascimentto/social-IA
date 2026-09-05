@@ -14,7 +14,7 @@ public final class ContentIdeaMapper {
     public static ContentIdeaResponse toResponse(ContentIdea entity) {
         List<String> ideas = Arrays.stream(entity.getIdeas().split("\\r?\\n"))
                 .map(String::trim)
-                .map(s -> s.replaceAll("^\\?\d+\.\\s*", "")) // remove leading numbering like "1. "
+                .map(s -> s.replaceFirst("^\\d+\\.\\s*", ""))
                 .filter(s -> !s.isEmpty())
                 .collect(Collectors.toList());
 
